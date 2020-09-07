@@ -16,7 +16,7 @@ const todoApp = angular.module("todoApp", []);
 
 // AJAX
 todoApp.run(($http) => {
-    $http.get("/data/todo.json")
+    $http.get("/src/data/todo.json")
         .then((res) => {
                 model.items = res.data;
             },

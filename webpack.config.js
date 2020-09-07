@@ -11,7 +11,8 @@ module.exports = {
     entry: {
         // vendor: ["jquery"],
         main: path.resolve(__dirname, "src", "main.js"),
-        todo: path.resolve(__dirname, "src", "todo.js")
+        todo: path.resolve(__dirname, "src", "todo.js"),
+        sportstore: path.resolve(__dirname, "./src/sportstore", "sportstore.js"),
     },
     output: {
         filename: `js/[name].js`,
@@ -103,6 +104,17 @@ module.exports = {
                         });
                     },
                 },
+                main: {
+                    name: "sportstore",
+                    chunks: "all",
+                    priority: 2,
+                    enforce: true,
+                    test(module, chunks) {
+                        return chunks.some((chunk) => {
+                            chunk.name === "sportstore";
+                        });
+                    },
+                },
                 todo: {
                     name: "todo",
                     chunks: "all",
@@ -140,9 +152,18 @@ module.exports = {
             template: path.resolve(__dirname, "src", "todo.html"),
             chunks: ['todo']
         }),
+        new HtmlWebpackPlugin({
+            filename: 'sportstore.html',
+            template: path.resolve(__dirname, "src/sportstore", "sportstore.html"),
+            chunks: ['sportstore']
+        }),
         new MiniCssExtractPlugin({
             filename: "css/[name].css",
             chunkFilename: "css/[name]-[hash].css",
+        }),
+        new MiniCssExtractPlugin({
+            filename: "sportstore/css/[name].css",
+            chunkFilename: "sportstore/css/[name]-[hash].css",
         }),
         new CleanWebpackPlugin({
             cleanAfterEveryBuildPatterns: ["dist/"],

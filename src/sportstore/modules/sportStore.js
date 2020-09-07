@@ -1,0 +1,1 @@
+const sportStoreApp = angular.module("sportStoreApp", []);
