@@ -36,7 +36,7 @@
           <th>Opis</th>
           <th>Zrobione</th>
           <tbody>
-            <tr ng-repeat="item in todo.items" | filter:{done: false} | orderBy:'action'>
+            <tr ng-repeat="item in todo.items | filter:{done: false} | orderBy:'action'"">
               <td>{{item.action}}</td>
               <td><input type="checkbox" ng-model="item.done" /></td>
               <td>{{item.done}}</td>

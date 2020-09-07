@@ -27,6 +27,22 @@ const model = {
 
 const todoApp = angular.module("todoApp", []);
 
+
+// create factory of filters by filter() method.
+todoApp.filter("checkedItems", () => {
+    return (items, showComplete) => {
+        let resultArr = [];
+
+        angular.forEach(items, (item) => {
+            if (item.done === false || showComplete === true) {
+                resultArr.push(item);
+            }
+        });
+
+        return resultArr;
+    }
+})
+
 todoApp.controller("ToDoCtrl", ["$scope", function ($scope) {
     $scope.todo = model;
 
