@@ -1,0 +1,13 @@
+[{
+        "action": "Kupić buty",
+        "done": false
+    },
+    {
+        "action": "Odebrać bilety",
+        "done": false
+    },
+    {
+        "action": "Zadzwonić do Janka",
+        "done": false
+    }
+]

@@ -10,23 +10,20 @@ import "./scss/app.scss";
 
 const model = {
     user: "Adam",
-    items: [{
-            action: "Kupić buty",
-            done: false
-        },
-        {
-            action: "Odebrać bilety",
-            done: false
-        },
-        {
-            action: "Zadzwonić do Janka",
-            done: false
-        }
-    ]
 }
 
 const todoApp = angular.module("todoApp", []);
 
+// AJAX
+todoApp.run(($http) => {
+    $http.get("/data/todo.json")
+        .then((res) => {
+                model.items = res.data;
+            },
+            (err) => {
+                console.log('Something went wrong');
+            })
+});
 
 // create factory of filters by filter() method.
 todoApp.filter("checkedItems", () => {

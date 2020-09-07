@@ -20,6 +20,9 @@ module.exports = {
     },
     watch: false,
     mode: "development",
+    devServer: {
+        contentBase: './src',
+    },
     // devtool: "source-map",
     module: {
         rules: [{
