@@ -1,4 +1,7 @@
-import '../modules/sportStore'
+import '../modules/sportStore';
+import {
+    sportStoreApp
+} from '../modules/sportStore';
 
 sportStoreApp.controller("sportStoreCtrl", ["$scope", ($scope) => {
     $scope.data = {

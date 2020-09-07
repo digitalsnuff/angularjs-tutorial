@@ -20,7 +20,17 @@
       </div>
       <div class="col-sm-8">
         <div class="card">
-          Miejsce na produkty
+          <div class="card" ng-repeat="item in data.products">
+            <div class="card-body">
+              <h3 class="card-title">
+                <strong>{{item.name}}</strong>
+                <span class=" pull-right badge badge-primary">
+                  {{item.price | currency}}
+                </span>
+              </h3>
+              <span class="card-text lead">{{item.description}}</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
