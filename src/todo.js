@@ -37,4 +37,15 @@ todoApp.controller("ToDoCtrl", ["$scope", function ($scope) {
         });
         return count;
     }
+
+    $scope.warningLevel = () => {
+        return $scope.incompleteCount() < 3 ? "badge-success" : "badge-warning";
+    }
+
+    $scope.addNewItem = (actionText) => {
+        $scope.todo.items.push({
+            action: actionText,
+            done: false
+        })
+    }
 }]);

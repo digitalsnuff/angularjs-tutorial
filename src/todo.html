@@ -12,16 +12,21 @@
     <div class="page-header">
       <h1>
         Lista rzeczy do zrobienia użytkownika {{ todo.user }}
-        <span class="badge badge-primary" ng-hide="incompleteCount() === 0"
-          >{{todo.items.length}}</span
+        <span
+          class="badge badge-primary"
+          ng-class="warningLevel()"
+          ng-hide="!incompleteCount()"
+          >{{incompleteCount()}}</span
         >
       </h1>
     </div>
     <div class="panel">
       <div class="input-group">
-        <input type="text" class="form-control" />
+        <input type="text" class="form-control" ng-model="actionText" />
         <span class="input-group-btn">
-          <button class="btn btn-primary">Dodaj</button>
+          <button class="btn btn-primary" ng-click="addNewItem(actionText)">
+            Dodaj
+          </button>
         </span>
       </div>
     </div>
@@ -31,7 +36,7 @@
           <th>Opis</th>
           <th>Zrobione</th>
           <tbody>
-            <tr ng-repeat="item in todo.items">
+            <tr ng-repeat="item in todo.items" | filter:{done: false} | orderBy:'action'>
               <td>{{item.action}}</td>
               <td><input type="checkbox" ng-model="item.done" /></td>
               <td>{{item.done}}</td>
