@@ -1,0 +1,153 @@
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const {
+    CleanWebpackPlugin
+} = require("clean-webpack-plugin");
+
+// https://stackoverflow.com/questions/35903246/how-to-create-multiple-output-paths-in-webpack-config
+
+module.exports = {
+    entry: {
+        // vendor: ["jquery"],
+        main: path.resolve(__dirname, "src", "main.js"),
+        todo: path.resolve(__dirname, "src", "todo.js")
+    },
+    output: {
+        filename: `js/[name].js`,
+        chunkFilename: "js/[name].js",
+        path: path.resolve(__dirname, "dist"),
+    },
+    watch: false,
+    mode: "development",
+    // devtool: "source-map",
+    module: {
+        rules: [{
+                test: /\.(js|jsx)$/,
+                exclude: /(node_modules|bower_components)/,
+                loader: "babel-loader",
+                options: {
+                    presets: ["@babel/preset-env"],
+                },
+            },
+            {
+                test: /\.(scss)$/,
+                exclude: /(node_modules|bower_components)/,
+                use: [{
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {
+                            publicPath: (resourcePath, context) => {
+                                return path.relative(path.dirname(resourcePath), context) + "/";
+                            },
+                        },
+                    },
+                    {
+                        loader: "css-loader",
+                    },
+                    {
+                        loader: `sass-loader`,
+                    },
+                    {
+                        loader: "postcss-loader",
+                        options: {
+                            plugins: function () {
+                                return [require("autoprefixer")];
+                            },
+                        },
+                    },
+                ],
+            },
+        ],
+    },
+    optimization: {
+        splitChunks: {
+            chunks: "all",
+            minSize: 20000,
+            maxSize: 0,
+            minChunks: 1,
+            maxAsyncRequests: 30,
+            maxInitialRequests: 30,
+            automaticNameDelimiter: "~",
+            enforceSizeThreshold: 50000,
+            cacheGroups: {
+                default: false,
+                vendors: false,
+                vendor: {
+                    test: (module) => /[\\/]node_modules[\\/]/.test(module.context),
+                    priority: -10,
+                    name: "vendor",
+                    chunks: "all",
+                    reuseExistingChunk: true,
+                    priority: 1,
+                    enforce: true,
+                    // test(module, chunks) {
+                    //     const name = module.nameForCondition && module.nameForCondition();
+                    //     return chunks.some((chunk) => {
+                    //         return (
+                    //             chunk.name === "main" && /[\\/]node_modules[\\/]/.test(name)
+                    //         );
+                    //     });
+                    // },
+                },
+                main: {
+                    name: "main",
+                    chunks: "all",
+                    priority: 2,
+                    enforce: true,
+                    test(module, chunks) {
+                        return chunks.some((chunk) => {
+                            chunk.name === "main";
+                        });
+                    },
+                },
+                todo: {
+                    name: "todo",
+                    chunks: "all",
+                    priority: 2,
+                    enforce: true,
+                    test(module, chunks) {
+                        return chunks.some((chunk) => {
+                            chunk.name === "todo";
+                        });
+                    },
+                },
+                stylesVendor: {
+                    name: "vendor",
+                    test: /scss\/vendor\.scss$/,
+                    chunks: (chunk) => chunk.name,
+                    enforce: true,
+                },
+                stylesApp: {
+                    name: "app",
+                    test: /scss\/app\.scss$/,
+                    chunks: 'all',
+                    enforce: true,
+                },
+            },
+        },
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            filename: 'index.html',
+            template: path.resolve(__dirname, "src", "index.html"),
+            chunks: ['main']
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'todo.html',
+            template: path.resolve(__dirname, "src", "todo.html"),
+            chunks: ['todo']
+        }),
+        new MiniCssExtractPlugin({
+            filename: "css/[name].css",
+            chunkFilename: "css/[name]-[hash].css",
+        }),
+        new CleanWebpackPlugin({
+            cleanAfterEveryBuildPatterns: ["dist/"],
+        }),
+    ],
+    resolve: {
+        modules: [process.env.NODE_PATH || "node_modules"],
+    },
+};
+
+//SuppressChunksPlugin

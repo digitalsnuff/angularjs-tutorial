@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="todoApp">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todop List</title>
+  </head>
+
+  <body>
+    <h1>AngularJS WORK! Template.</h1>
+    <div class="btn btn-primary">{{"AngularJS"}}</div>
+    <div class="btn btn-primary">Bootstrap</div>
+    <div class="page-header">
+      <h1>Lista rzeczy do zrobienia:</h1>
+    </div>
+    <div class="panel">
+      <div class="input-group">
+        <input type="text" class="form-control" />
+        <span class="input-group-btn">
+          <button class="btn btn-primary">Dodaj</button>
+        </span>
+      </div>
+    </div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Opis</th>
+          <th>Zrobione</th>
+          <tbody>
+            {#
+            <tr>
+              <td>Kupić kwiaty</td>
+              <td>Nie</td>
+            </tr>
+            <tr>
+              <td>Kupic buty</td>
+              <td>Nie</td>
+            </tr>
+            <tr>
+              <td>Odebrać bilety</td>
+              <td>Tak</td>
+            </tr>
+            <tr>
+              <td>Zadzwonić do Janka</td>
+              <td>Tak</td>
+            </tr>
+            #}
+          </tbody>
+        </tr>
+      </thead>
+    </table>
+  </body>
+</html>
