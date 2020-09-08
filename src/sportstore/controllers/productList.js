@@ -9,7 +9,7 @@ sportStoreApp
     });
 
 sportStoreApp
-    .controller("productListCtrl", ["$scope", '$filter', 'PRODUCT_LIST_CONFIG', ($scope, $filter, PRODUCT_LIST_CONFIG) => {
+    .controller("productListCtrl", ["$scope", '$filter', 'PRODUCT_LIST_CONFIG', 'cart', ($scope, $filter, PRODUCT_LIST_CONFIG, cart) => {
         let selectedCategory = null;
 
         $scope.selectedPage = 1;
@@ -34,5 +34,9 @@ sportStoreApp
 
         $scope.getPageClass = (page) => {
             return $scope.selectedPage === page ? PRODUCT_LIST_CONFIG.classListActive : "";
+        }
+
+        $scope.addProductToCart = (product) => {
+            cart.addProduct(product.id, product.name, product.price);
         }
     }])
