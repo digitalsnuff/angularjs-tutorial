@@ -12,15 +12,18 @@
     <a class="navbar-brand" href="#">SKLEP SPORTOWY</a>
   </div>
   <div class="container">
-    <div class="row">
+    <div class="row" ng-controller="productListCtrl">
       <div class="col-sm-3">
         <div class="card">
-          Miejsce na kategorie
+          <a ng-click="selectCategory()" class="btn btn-block btn-secondary btn-lg">Strona główna</a>
+          <a href="#" ng-repeat="item in data.products | orderBy: 'category' | unique: 'category'"
+            ng-click="selectCategory(item)" class="btn btn-block btn-primary btn-lg"
+            ng-class="getCategoryClass(item)">{{item}}</a>
         </div>
       </div>
       <div class="col-sm-8">
         <div class="card">
-          <div class="card" ng-repeat="item in data.products">
+          <div class="card" ng-repeat="item in data.products | filter:categoryFilterFn | range:selectedPage:pageSize">
             <div class="card-body">
               <h3 class="card-title">
                 <strong>{{item.name}}</strong>
@@ -31,6 +34,11 @@
               <span class="card-text lead">{{item.description}}</span>
             </div>
           </div>
+        </div>
+        <div class="pull-right btn-group">
+          <a href="" ng-repeat="page in data.products | filter:categoryFilterFn | pageCount:pageSize"
+            ng-click="selectPage($index + 1)" class="btn btn-primary"
+            ng-class="getPageClass($index +1 )">{{$index+1}}</a>
         </div>
       </div>
     </div>
