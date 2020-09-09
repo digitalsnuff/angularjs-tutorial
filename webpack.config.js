@@ -9,20 +9,28 @@ const {
 
 module.exports = {
     entry: {
-        // vendor: ["jquery"],
-        main: path.resolve(__dirname, "src", "main.js"),
-        todo: path.resolve(__dirname, "src", "todo.js"),
-        sportstore: path.resolve(__dirname, "./src/sportstore", "sportstore.js"),
+        "main": path.resolve(__dirname, "src", "main.js"),
+        "todo": path.resolve(__dirname, "src/todo", "todo.js"),
+        "sportstore": path.resolve(__dirname, "src/sportstore", "sportstore.js"),
     },
     output: {
-        filename: `js/[name].js`,
-        chunkFilename: "js/[name].js",
+        filename: `[name].js`,
+        chunkFilename: "[name].js",
         path: path.resolve(__dirname, "dist"),
     },
     watch: false,
     mode: "development",
     devServer: {
-        contentBase: './src',
+        contentBase: [path.join(__dirname, 'src/sportstore'), path.join(__dirname, 'src/sportstore/assets/scss')],
+        liveReload: true,
+        open: true,
+        historyApiFallback: {
+            index: 'sportstore.html',
+            rewrites: [{
+                from: /^\/(checkout|products)/,
+                to: '/sportstore.html'
+            }]
+        }
     },
     // devtool: "source-map",
     module: {
@@ -149,7 +157,7 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({
             filename: 'todo.html',
-            template: path.resolve(__dirname, "src", "todo.html"),
+            template: path.resolve(__dirname, "src/todo", "todo.html"),
             chunks: ['todo']
         }),
         new HtmlWebpackPlugin({
@@ -160,10 +168,6 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: "css/[name].css",
             chunkFilename: "css/[name]-[hash].css",
-        }),
-        new MiniCssExtractPlugin({
-            filename: "sportstore/css/[name].css",
-            chunkFilename: "sportstore/css/[name]-[hash].css",
         }),
         new CleanWebpackPlugin({
             cleanAfterEveryBuildPatterns: ["dist/"],

@@ -9,8 +9,11 @@ sportStoreApp
     });
 
 sportStoreApp
-    .controller("productListCtrl", ["$scope", '$filter', 'PRODUCT_LIST_CONFIG', 'cart', ($scope, $filter, PRODUCT_LIST_CONFIG, cart) => {
+    .controller("productListCtrl", ["$scope", '$filter', '$location', 'PRODUCT_LIST_CONFIG', 'cart', ($scope, $filter, $location, PRODUCT_LIST_CONFIG, cart) => {
         let selectedCategory = null;
+
+        var url = $location.url();
+        console.log(url);
 
         $scope.selectedPage = 1;
         $scope.pageSize = PRODUCT_LIST_CONFIG.pageCount;

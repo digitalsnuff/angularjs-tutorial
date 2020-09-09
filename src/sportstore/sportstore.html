@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <base href="/">
   <title>Sport Store</title>
 </head>
 
@@ -14,11 +15,9 @@
   </div>
   <div class="alert alert-danger" ng-show="data.error">
     Błąd ({{data.error.status}}). Dane produktu nie zostały wczytane.
-    <a href="/sportstore.html" class="alert-link">Kliknij tutaj, aby spróbowac ponownie</a>
+    <a href="/" class="alert-link">Kliknij tutaj, aby spróbowac ponownie</a>
   </div>
   <ng-view></ng-view>
-  <ng-include src="'sportstore/views/productList.html'" onload="console.log('loading...')"></ng-include>
-
 </body>
 
 </html>

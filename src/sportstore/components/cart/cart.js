@@ -42,7 +42,7 @@ const cartComponent = cart.factory("cart", () => {
     .directive("cartSummary", (cart) => {
         return {
             restrict: "E",
-            templateUrl: "sportstore/components/cart/cartSummary.html",
+            templateUrl: "components/cart/cartSummary.html",
             controller: ($scope) => {
                 let cartData = cart.getProducts();
                 $scope.total = () => {

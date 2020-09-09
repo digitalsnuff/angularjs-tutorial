@@ -4,9 +4,7 @@ import 'angular';
 // import 'bootstrap/js/dist/util';
 // import 'bootstrap/js/dist/dropdown';
 
-
-import "./scss/vendor.scss";
-import "./scss/app.scss";
+import "../scss/vendor.scss";
 
 const model = {
     user: "Adam",
