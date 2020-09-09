@@ -17,6 +17,7 @@ module.exports = {
         filename: `[name].js`,
         chunkFilename: "[name].js",
         path: path.resolve(__dirname, "dist"),
+        publicPath: "/"
     },
     watch: false,
     mode: "development",
@@ -24,12 +25,19 @@ module.exports = {
         contentBase: [path.join(__dirname, 'src/sportstore'), path.join(__dirname, 'src/sportstore/assets/scss')],
         liveReload: true,
         open: true,
+        index: 'sportstore.html',
         historyApiFallback: {
+            disableDotRule: true,
             index: 'sportstore.html',
             rewrites: [{
-                from: /^\/(checkout|products)/,
-                to: '/sportstore.html'
-            }]
+                    from: /(.*)/,
+                    to: '/'
+                },
+                {
+                    from: /\./,
+                    to: '/'
+                }
+            ]
         }
     },
     // devtool: "source-map",

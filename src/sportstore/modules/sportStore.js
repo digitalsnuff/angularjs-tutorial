@@ -16,19 +16,15 @@ sportStoreApp.config(
 
         $routeProvider.when("/products", {
             templateUrl: './views/productList.html'
-            //template: '<div>products</div>'
         });
 
         $routeProvider.when("/", {
             templateUrl: './views/productList.html'
         });
 
-        // var url = $location.url();
-        // console.log(url);
-
-        // $routeProvider.otherwise({
-        //     template: '<h1>Not Found</h1>'
-        // });
+        $routeProvider.otherwise({
+            template: '<h1>Not Found</h1>'
+        });
         $locationProvider.html5Mode(true);
     }]);
 
