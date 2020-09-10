@@ -1,6 +1,4 @@
-import {
-    customFilters
-} from '../modules/customFilters';
+import customFilters from '../modules/customFilters';
 
 customFilters.filter("unique", () => {
         return (data, propertyName) => {

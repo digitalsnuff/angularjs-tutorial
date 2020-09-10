@@ -10,6 +10,14 @@ const sportStoreApp = angular.module("sportStoreApp", ["customFilters", "cart", 
 
 sportStoreApp.config(
     ['$routeProvider', '$locationProvider', ($routeProvider, $locationProvider) => {
+        $routeProvider.when("/complete", {
+            templateUrl: "./views/thankYou.html"
+        });
+
+        $routeProvider.when("/placeorder", {
+            templateUrl: "./views/placeOrder.html"
+        });
+
         $routeProvider.when("/checkout", {
             templateUrl: './views/checkoutSummary.html'
         });
@@ -28,6 +36,4 @@ sportStoreApp.config(
         $locationProvider.html5Mode(true);
     }]);
 
-export {
-    sportStoreApp
-};
+export default sportStoreApp;

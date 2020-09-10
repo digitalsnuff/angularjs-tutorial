@@ -1,6 +1,4 @@
-import {
-    cart
-} from '../../modules/cart';
+import cart from '../../modules/cart';
 
 const cartComponent = cart.factory("cart", () => {
         let cartData = [];
