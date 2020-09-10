@@ -12,6 +12,7 @@ module.exports = {
         "main": path.resolve(__dirname, "src", "main.js"),
         "todo": path.resolve(__dirname, "src/todo", "todo.js"),
         "sportstore": path.resolve(__dirname, "src/sportstore", "sportstore.js"),
+        "admin": path.resolve(__dirname, "src/sportstore", "admin.js"),
     },
     output: {
         filename: `[name].js`,
@@ -36,6 +37,11 @@ module.exports = {
                 {
                     from: /\./,
                     to: '/'
+                },
+                {
+                    from: /^(admin)/,
+                    to: '/',
+                    index: 'admin.html'
                 }
             ]
         }
@@ -120,7 +126,7 @@ module.exports = {
                         });
                     },
                 },
-                main: {
+                sportstore: {
                     name: "sportstore",
                     chunks: "all",
                     priority: 2,
@@ -128,6 +134,17 @@ module.exports = {
                     test(module, chunks) {
                         return chunks.some((chunk) => {
                             chunk.name === "sportstore";
+                        });
+                    },
+                },
+                sportstore: {
+                    name: "admin",
+                    chunks: "all",
+                    priority: 2,
+                    enforce: true,
+                    test(module, chunks) {
+                        return chunks.some((chunk) => {
+                            chunk.name === "admin";
                         });
                     },
                 },
@@ -172,6 +189,11 @@ module.exports = {
             filename: 'sportstore.html',
             template: path.resolve(__dirname, "src/sportstore", "sportstore.html"),
             chunks: ['sportstore']
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'admin.html',
+            template: path.resolve(__dirname, "src/sportstore", "admin.html"),
+            chunks: ['admin']
         }),
         new MiniCssExtractPlugin({
             filename: "css/[name].css",
