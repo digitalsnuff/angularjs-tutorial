@@ -31,6 +31,11 @@ module.exports = {
             disableDotRule: true,
             index: 'sportstore.html',
             rewrites: [{
+                    from: /^\/admin/,
+                    to: '/admin.html',
+                    index: 'admin.html'
+                },
+                {
                     from: /(.*)/,
                     to: '/'
                 },
@@ -38,13 +43,18 @@ module.exports = {
                     from: /\./,
                     to: '/'
                 },
-                {
-                    from: /^(admin)/,
-                    to: '/',
-                    index: 'admin.html'
-                }
+
             ]
-        }
+        },
+        proxy: [{
+            context: ['/auth', '/api'],
+            target: 'http://localhost:1337',
+            //changeOrigin: true
+            pathRewrite: {
+                '^/api': ''
+            }
+        }]
+
     },
     // devtool: "source-map",
     module: {

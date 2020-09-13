@@ -3,8 +3,8 @@ import cart from '../modules/cart';
 
 sportStoreApp.constant(
     'SPORT_STORE_CONFIG', {
-        dataUrl: 'http://localhost:1337/products',
-        orderUrl: 'http://localhost:1337/orders'
+        dataUrl: '/api/products',
+        orderUrl: '/api/orders'
     }
 );
 

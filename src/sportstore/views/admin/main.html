@@ -1,0 +1,20 @@
+<div class="container-fluid">
+    <div class="row" ng-controller="mainCtrl">
+        <div class="col-sm-3">
+            <div class="card">
+                <div class="card-body">
+                    <a href="" ng-repeat="item in screens" class="btn btn-block"
+                        ng-class="item === current ? 'btn-primary': 'btn-secondary'"
+                        ng-click="setScreen($index)">{{item}}</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="card">
+                <div class="card-body">
+                    <div ng-include="getScreen()"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

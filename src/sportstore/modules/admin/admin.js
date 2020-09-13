@@ -1,13 +1,18 @@
-const sportStoreAdmin = angular.module("sportStoreAdmin", ["ngRoute"]);
+const sportStoreAdmin = angular.module("sportStoreAdmin", ["ngRoute", "ngResource"]);
 
 sportStoreAdmin.config(
-    ['$routeProvider', ($routeProvider) => {
-        $routeProvider.when("/login", {
-                templateUrl: './views/admin/login.html'
-            }),
-            $routeProvider.when("/main", {
-                templateUrl: './views/admin/main.html'
-            })
+    ['$routeProvider', '$locationProvider', ($routeProvider, $locationProvider) => {
+        $routeProvider.when("/admin/login", {
+            templateUrl: './views/admin/login.html'
+        });
+        $routeProvider.when("/admin/main", {
+            templateUrl: './views/admin/main.html'
+        });
+        $routeProvider.otherwise({
+            redirectTo: "/admin/login"
+        });
+
+        $locationProvider.html5Mode(true);
     }]
 );
 

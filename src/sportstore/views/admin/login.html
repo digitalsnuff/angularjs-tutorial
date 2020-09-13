@@ -1,1 +1,23 @@
-<div>Admin Login</div>
+<div class="card" ng-controller="authCtrl">
+    <div class="alert alert-info" ng-hide="authenticationError">
+        Aby uwierzytelnić się, podaj nazwę użytkownika i hasło, a następnie naciśnij przycisk zaloguj.
+    </div>
+    <div class="alert alert-danger" ng-show="authenticationError">
+        Uwierzytelnienie nie powiodło się ({{authenticationError.status}}).
+        Spróbuj ponownie.
+    </div>
+    <form name="authForm" novalidate>
+        <div class="form-group">
+            <label for="username">Nazwa Użytkownika</label>
+            <input type="text" class="form-control" name="username" ng-model="username" required />
+        </div>
+        <div class="form-group">
+            <label for="password">Hasło</label>
+            <input type="password" class="form-control" name="password" ng-model="password" required />
+        </div>
+        <div class="text-center">
+            <button class="btn btn-primary" ng-click="authenticate(username,password)"
+                ng-disabled="authForm.$invalid">Zaloguj</button>
+        </div>
+    </form>
+</div>

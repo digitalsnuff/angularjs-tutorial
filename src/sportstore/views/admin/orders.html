@@ -1,0 +1,43 @@
+<div ng-controller="ordersCtrl">
+    <table class="table table-stripped table-bordered">
+        <thead>
+            <tr>
+                <th>Imię i nazwisko</th>
+                <th>Miasto</th>
+                <th>Wartość</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="order in orders">
+                <td>{{order.name}}</td>
+                <td>{{order.city}}</td>
+                <td>{{calcTotal(order) | currency}}</td>
+                <td>
+                    <button ng-click="selectOrder(order)" class="btn btn-sm btn-primary">
+                        Szczegóły
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div ng-show="selectedOrder">
+        <h3>Szczegóły zamówienia</h3>
+        <table class="table table-stripped table-bordered">
+            <thead>
+                <tr>
+                    <th>Nazwa</th>
+                    <th>Ilość</th>
+                    <th>Cena</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in selectedOrder.products">
+                    <td>{{item.name}}</td>
+                    <td>{{item.count}}</td>
+                    <td>{{item.price}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
