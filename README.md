@@ -1,4 +1,7 @@
-# AngularJS TODO App
+# AngularJS Tutorial
+
+- AngularJS TODO App
+- AngularJS SportStore Shop
 
 This tutorial is based on _Pro AngularJS_ of Adam Freeman, Apress, 2014.
 
